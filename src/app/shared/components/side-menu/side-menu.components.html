@@ -1,1 +1,41 @@
-<p>side-menu.components works!</p>
+<h2>Paginas</h2>
+<hr>
+
+<h3>Reactivos</h3>
+<ul class="list-group">
+    @for(menuItem of reactiveMenu; track $index) {
+        <li class="list-group-item">
+            <a 
+            [routerLink]="menuItem.route"
+            routerLinkActive="active">
+            {{menuItem.title}}
+        </a>
+        </li>
+    }
+</ul>
+
+<h3>Auth</h3>
+<ul class="list-group">
+    @for(menuItem of authMenu; track $index) {
+        <li class="list-group-item">
+            <a 
+            [routerLink]="menuItem.route"
+            routerLinkActive="active">
+            {{menuItem.title}}
+        </a>
+        </li>
+    }
+</ul>
+
+<h3>Country</h3>
+<ul class="list-group">
+    @for(menuItem of countryMenu; track $index) {
+        <li class="list-group-item">
+            <a 
+            [routerLink]="menuItem.route"
+            routerLinkActive="active">
+            {{menuItem.title}}
+        </a>
+        </li>
+    }
+</ul>
