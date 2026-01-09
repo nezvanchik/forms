@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { JsonPipe } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormUtils } from '../../../utils/form-utils';
 
 @Component({
@@ -22,7 +22,17 @@ export class RegisterPageComponent {
     password: ['',[Validators.required, Validators.minLength(6)]],
     confirmPassword: ['',[Validators.required, Validators.minLength(6)]],
     
+  },{
+    validators: [ this.passwordMatch('password', 'confirmPassword')]
   })
+
+  passwordMatch(field1: string, field2: string) {
+    return (formGroup: AbstractControl) => {
+        const password = formGroup.get(field1)?.value;
+        const confirmPassword = formGroup.get(field2)?.value;
+        return password === confirmPassword ? null : { passwordnotMatch: true };
+    }
+  }
 
   onSubmit() {
     if (this.myForm.invalid) {
